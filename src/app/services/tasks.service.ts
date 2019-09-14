@@ -5,28 +5,31 @@ import { Task } from '../model/task';
 
 @Injectable()
 export class TasksService {
-
   private tasksList: Array<Task> = [];
   private tasksDone: Array<Task> = [];
 
-private tasksListObs = new BehaviorSubject<Array<Task>>([]);
-private tasksDoneObs = new BehaviorSubject<Array<Task>>([]);
+  private tasksListObs = new BehaviorSubject<Array<Task>>([]);
+  private tasksDoneObs = new BehaviorSubject<Array<Task>>([]);
+
   constructor() {
+    console.log('TasksService');
     this.tasksList = [
-      {name: 'Sprzatanie', created: new Date()},
-      {name: 'Nauka', created: new Date()},
-      {name: 'Gotowanie', created: new Date()},
-      {name: 'Zakupy', created: new Date()}];
+      { name: 'Sprzątanie kuwety', created: new Date() },
+      { name: 'Nauka Angulara', created: new Date() },
+      { name: 'Podlewanie kwiatów', created: new Date() },
+      { name: 'Zakupy', created: new Date() }
+    ];
     this.tasksListObs.next(this.tasksList);
   }
+
   add(task: Task) {
     this.tasksList.push(task);
     this.tasksListObs.next(this.tasksList);
   }
 
   remove(task: Task) {
-   this.tasksList = this.tasksList.filter( e => e !== task);
-   this.tasksListObs.next(this.tasksList);
+    this.tasksList = this.tasksList.filter(e => e !== task);
+    this.tasksListObs.next(this.tasksList);
   }
 
   done(task: Task) {
@@ -38,8 +41,8 @@ private tasksDoneObs = new BehaviorSubject<Array<Task>>([]);
   getTasksListObs(): Observable<Array<Task>> {
     return this.tasksListObs.asObservable();
   }
+
   getTasksDoneObs(): Observable<Array<Task>> {
     return this.tasksDoneObs.asObservable();
   }
-
 }

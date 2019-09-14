@@ -9,6 +9,7 @@ import { Task } from '../model/task';
 })
 export class DoneTaskComponent implements OnInit {
 
+
   tasksDone: Array<Task> = [];
 
   constructor(private tasksService: TasksService) {

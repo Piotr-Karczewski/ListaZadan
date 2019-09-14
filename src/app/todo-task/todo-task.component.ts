@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../model/task';
 
@@ -9,11 +9,10 @@ import { Task } from '../model/task';
 })
 export class TodoTaskComponent implements OnInit {
 
-
   tasksList: Array<Task> = [];
 
-
   constructor(private tasksService: TasksService) {
+    console.log('TodoTaskComponent');
     this.tasksService.getTasksListObs().subscribe((tasks: Array<Task>) => {
       this.tasksList = tasks;
     });
@@ -27,8 +26,8 @@ export class TodoTaskComponent implements OnInit {
   }
 
   done(task: Task) {
+    task.end = new Date();
     this.tasksService.done(task);
-
   }
 
   getColor(): string {

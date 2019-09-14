@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../model/task';
 
@@ -8,22 +8,16 @@ import { Task } from '../model/task';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent implements OnInit {
-
   newTask: string;
 
+  constructor(private tasksService: TasksService) {}
 
-  constructor(private tasksService: TasksService) {
-
-   }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   add() {
-    const task: Task = ({name: this.newTask, created: new Date()
-    });
+    const task: Task = { name: this.newTask, created: new Date() };
     this.tasksService.add(task);
     this.newTask = '';
   }
-
 }
+
